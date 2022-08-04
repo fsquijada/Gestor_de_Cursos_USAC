@@ -1,2 +1,2 @@
-# LenguajesFormalesPrac_y_Proy
+# Lenguajes Formales y de Programación
 Practicas y Proyectos de Lenguajes Formales USAC
