@@ -1,19 +1,11 @@
-from archivos.cursos import Cursos
+from tkinter import *
+from cursos import Cursos
+from menus import Menus
 
 cursos = Cursos ()
+menu = Menus ()
 
-# cursos.ListadoCursos()
-# print("--------------------------")
-# cursos.AgregarCurso("017", "Social Humanistica 1", "", "1", "1", "4", "0")
-# cursos.AgregarCurso("101", "Matematica basica 1", "", "1", "1", "7", "0")
-# cursos.AgregarCurso("069", "Tecnica Complementaria 1", "", "1", "1", "3", "0")
-# cursos.AgregarCurso("039", "Deportes 1", "", "0", "1", "1", "-1")
-# cursos.AgregarCurso("348", "Quimica General 1", "", "1", "1", "3", "0")
-# cursos.AgregarCurso("006", "Idioma Tecnico 1", "", "0", "1", "2", "0")
-# cursos.AgregarCurso("150", "Fisica 1", "103, 147", "1", "3", "6", "1")
-# cursos.ListadoCursos()
-
-cursos.CargaData("archivos/contenido.lfp")
+# cursos.CargaData("archivos/contenido.lfp")
 # cursos.ListadoCompleto()
 # cursos.MostrarCurso("960")
 # cursos.MostrarCurso("152")
@@ -28,3 +20,17 @@ cursos.CargaData("archivos/contenido.lfp")
 # cursos.CreditosPendientes()
 # cursos.CreditosN ("3")
 # cursos.CreditosSemestre("2")
+
+
+# frameSuperiorRoot = Frame()
+# frameSuperiorRoot.config(width="800", height="150", bg="lightblue")
+# tituloNombreCurso = Label (root, text="Nombre del Curso: Lenguajes Formales y de Programación").pack(anchor=NW)
+# tituloNombreEstudiante = Label (root, text="Nombre del Estudiante: Fredy Samuel Quijada Ceballos").pack(anchor=NW)
+# tituloCarneEstudiante = Label (root, text="Carné del Estudiante: 202004812").pack(anchor=NW)
+# frameSuperiorRoot.pack()
+# frameInferiorRoot = Frame()
+# frameInferiorRoot.config(width="800", height="450", bg="lightblue")
+# frameInferiorRoot.pack()
+
+# root.mainloop()
+#Menus()
