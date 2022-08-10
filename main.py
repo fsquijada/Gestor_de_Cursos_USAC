@@ -1,8 +1,6 @@
 from tkinter import *
-from cursos import Cursos
 from menus import Menus
 
-cursos = Cursos ()
 menu = Menus ()
 
 # cursos.CargaData("archivos/contenido.lfp")
@@ -20,17 +18,3 @@ menu = Menus ()
 # cursos.CreditosPendientes()
 # cursos.CreditosN ("3")
 # cursos.CreditosSemestre("2")
-
-
-# frameSuperiorRoot = Frame()
-# frameSuperiorRoot.config(width="800", height="150", bg="lightblue")
-# tituloNombreCurso = Label (root, text="Nombre del Curso: Lenguajes Formales y de Programación").pack(anchor=NW)
-# tituloNombreEstudiante = Label (root, text="Nombre del Estudiante: Fredy Samuel Quijada Ceballos").pack(anchor=NW)
-# tituloCarneEstudiante = Label (root, text="Carné del Estudiante: 202004812").pack(anchor=NW)
-# frameSuperiorRoot.pack()
-# frameInferiorRoot = Frame()
-# frameInferiorRoot.config(width="800", height="450", bg="lightblue")
-# frameInferiorRoot.pack()
-
-# root.mainloop()
-#Menus()

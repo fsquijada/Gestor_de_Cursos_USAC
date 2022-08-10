@@ -99,9 +99,7 @@ class Cursos:
         for curso in self.listado:
             if codigo == curso.codigo:
                 self.listado.remove (curso)
-                print("Curso eliminado")
                 return
-        print("No existe ese curso")
         return None
 
     # Cantidad de créditos aprobados

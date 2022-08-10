@@ -1,0 +1,8 @@
+#---------------------------------------------
+Codigo
+Nombre
+PreRequisito1;PreRequisito2
+Obligatorio (1 obligatorio, 0 opcional)
+Semestre
+Créditos
+Estado (0 Aprobado, 1 Cursando, -1 Pendiente)
