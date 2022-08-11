@@ -44,7 +44,8 @@ class Cursos:
                 nombre = dato
                 contador += 1
             elif contador == 2:
-                clases = dato.split(";")
+                antes = dato.replace(";", ";,")
+                clases = antes.split(";")
                 pre_requisitos = clases
                 contador += 1
             elif contador == 3:
