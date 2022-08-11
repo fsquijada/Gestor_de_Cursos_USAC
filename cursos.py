@@ -21,21 +21,21 @@ class Cursos:
 
     # Carga del listado de cursos
     def CargaData (self, ruta):
-        # archivo = open(ruta, "r", "", "utf-8")
-        archivo = open(ruta, "r", 1, "utf-8")
+        # archivo = open(ruta, 'r', '', 'utf-8')
+        archivo = open(ruta, 'r', 1, 'utf-8')
         listaClases = archivo.read()
         archivo.close()
-        x = listaClases.replace("\n", ",") # Reemplaza los saltos de línea por comas
-        y = x.split(",") # Separa todo el string por cada coma
+        x = listaClases.replace('\n', ',') # Reemplaza los saltos de línea por comas
+        y = x.split(',') # Separa todo el string por cada coma
         # Iteración para ir agregando cada curso
         contador = 0
-        codigo = ""
-        nombre = ""
-        pre_requisitos = ""
-        obligatorio = ""
-        semestre = ""
-        creditos = ""
-        estado = ""
+        codigo = ''
+        nombre = ''
+        pre_requisitos = ''
+        obligatorio = ''
+        semestre = ''
+        creditos = ''
+        estado = ''
         for dato in y:
             if contador == 0:
                 codigo = dato
@@ -44,8 +44,8 @@ class Cursos:
                 nombre = dato
                 contador += 1
             elif contador == 2:
-                antes = dato.replace(";", ";,")
-                clases = antes.split(";")
+                antes = dato.replace(';', ';,')
+                clases = antes.split(';')
                 pre_requisitos = clases
                 contador += 1
             elif contador == 3:
@@ -67,19 +67,21 @@ class Cursos:
     # Ver listado actual
     def ListadoCompleto (self):
         for curso in self.listado:
-            print(f"Codigo: {curso.codigo}, Nombre: {curso.nombre}, Pre: {curso.pre_requisitos}, Obligatorio: {curso.obligatorio}, Semestre: {curso.semestre}, Creditos: {curso.creditos}, Estado: {curso.estado}")
+            print(f'Codigo: {curso.codigo}, Nombre: {curso.nombre}, Pre: {curso.pre_requisitos}, Obligatorio: {curso.obligatorio}, Semestre: {curso.semestre}, Creditos: {curso.creditos}, Estado: {curso.estado}')
 
     # Mostrar un Curso
     def MostrarCurso (self, codigo):
         for curso in self.listado:
             if codigo == curso.codigo:
-                print(f"Codigo: {curso.codigo}, Nombre: {curso.nombre}, Pre: {curso.pre_requisitos}, Obligatorio: {curso.obligatorio}, Semestre: {curso.semestre}, Creditos: {curso.creditos}, Estado: {curso.estado}")
+                print(f'Codigo: {curso.codigo}, Nombre: {curso.nombre}, Pre: {curso.pre_requisitos}, Obligatorio: {curso.obligatorio}, Semestre: {curso.semestre}, Creditos: {curso.creditos}, Estado: {curso.estado}')
                 return
         return None
 
     # Agregar Curso
     def AgregarCurso (self, codigo, nombre, pre_requisitos, obligatorio, semestre, creditos, estado):
-        nuevo = Listado(codigo, nombre, pre_requisitos, obligatorio, semestre, creditos, estado)
+        antes = pre_requisitos.replace(';', ',')
+        ultimo = antes.replace(' ', '')
+        nuevo = Listado(codigo, nombre, ultimo, obligatorio, semestre, creditos, estado)
         self.listado.append (nuevo)
 
     # Editar Curso
@@ -107,27 +109,27 @@ class Cursos:
     def CreditosAprobados (self):
         creditos = 0
         for curso in self.listado:
-            if curso.estado == "0":
+            if curso.estado == '0':
                 creditos += int(curso.creditos)
-        print(f"Créditos Aprobados: {creditos}")
+        print(f'Créditos Aprobados: {creditos}')
         #!return creditos
 
     # Cantidad de créditos cursando
     def CreditosCursando (self):
         creditos = 0
         for curso in self.listado:
-            if curso.estado == "1":
+            if curso.estado == '1':
                 creditos += int(curso.creditos)
-        print(f"Créditos Cursando: {creditos}")
+        print(f'Créditos Cursando: {creditos}')
         #!return creditos
 
     # Cantidad de créditos pendientes
     def CreditosPendientes (self):
         creditos = 0
         for curso in self.listado:
-            if curso.estado == "-1":
+            if curso.estado == '-1':
                 creditos += int(curso.creditos)
-        print(f"Créditos Pendientes: {creditos}")
+        print(f'Créditos Pendientes: {creditos}')
         return creditos
 
     # Cantidad de créditos hasta semestre N
@@ -135,9 +137,9 @@ class Cursos:
         creditos = 0
         for curso in self.listado:
             if  int(curso.semestre) <= int(semestre):
-                if curso.obligatorio == "1":
+                if curso.obligatorio == '1':
                     creditos += int(curso.creditos)
-        print(f"Creditos obligatorios hasta el semestre {semestre}: {creditos}")
+        print(f'Creditos obligatorios hasta el semestre {semestre}: {creditos}')
         return creditos
 
     # Cantidad de créditos del semestre
@@ -147,10 +149,10 @@ class Cursos:
         creditosPendientes = 0
         for curso in self.listado:
             if int(semestre) == int(curso.semestre):
-                if curso.estado == "0":
+                if curso.estado == '0':
                     creditosAprobados += int(curso.creditos)
-                elif curso.estado == "1":
+                elif curso.estado == '1':
                     creditosAsignados += int(curso.creditos)
                 else:
                     creditosPendientes += int(curso.creditos)
-        print (f"Aprobados: {creditosAprobados}\nAsignados: {creditosAsignados}\nPendientes: {creditosPendientes}")
+        print (f'Aprobados: {creditosAprobados}\nAsignados: {creditosAsignados}\nPendientes: {creditosPendientes}')
