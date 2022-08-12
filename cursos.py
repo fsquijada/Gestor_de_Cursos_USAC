@@ -136,7 +136,6 @@ class Cursos:
             if  int(curso.semestre) <= int(semestre):
                 if curso.obligatorio == '1':
                     creditos += int(curso.creditos)
-        #print(f'Creditos obligatorios hasta el semestre {semestre}: {creditos}')
         return creditos
 
     # Cantidad de créditos del semestre
@@ -156,5 +155,4 @@ class Cursos:
         listaCreditos.append(creditosAprobados)
         listaCreditos.append(creditosAsignados)
         listaCreditos.append(creditosPendientes)
-        #print (f'Aprobados: {creditosAprobados}\nAsignados: {creditosAsignados}\nPendientes: {creditosPendientes}')
         return listaCreditos

@@ -1,8 +1,6 @@
-from cgitb import text
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
-import tkinter
 from tkinter.messagebox import *
 from cursos import Cursos
 
@@ -364,7 +362,6 @@ class Menus:
         botonRegresar = ttk.Button (frame3, text='Regresar', command=lambda: self.MostrarEliminarVentana(root, ventanaCreditos))
         botonRegresar.grid(column=1, row=1, ipadx=80, ipady=5, padx=10, pady=10)
 
-    
     #!:::::::::::::::::::::::::::MÉTODOS DE VENTANAS::::::::::::::::::::::::::::::::::::::::
     # Función para definir el tamaño de la ventana y centrarlo en la pantalla
     def EditorVentana (self, ventana, ancho, alto):
@@ -420,6 +417,7 @@ class Menus:
             showerror ('INGENIERIA USAC - Agregar Curso', 'Aún no se han ingresado todos los datos')
         else:
             if semestre == '1' or semestre == '2' or semestre == '3' or semestre == '4' or semestre == '5' or semestre == '6' or semestre == '7' or semestre == '8' or semestre == '9' or semestre == '10':
+                cursos.EliminarCurso(codigo)
                 cursos.AgregarCurso(codigo, nombre, preRequisitos, opcionalidad, semestre, creditos, estado)
                 self.EliminarVentana(ventana)
                 self.VentanaGestion()
@@ -446,13 +444,14 @@ class Menus:
         if respuesta == True:
             cursos.EliminarCurso(codigo)
             self.EliminarVentana(ventana)
-            self.VentanaGestion()  
+            self.VentanaGestion()
+            showinfo ('INGENIERIA USAC - Eliminar Curso', f'El curso {nombre} fue eliminado exitosamente')
 
-    # Método para contar los créditos obligatorios hasta el semestre N
+    # Método para contar los créditos obligatorios hasta el semestre N y trasladarlos a un label
     def CreditosN (self, texto, semestre):
         texto.set(f'{cursos.CreditosN(semestre)} Créditos Obligatorios')
 
-    # Método para contar los créditos de determinado semestre
+    # Método para contar los créditos de determinado semestre y trasladarlos a un label
     def CreditosSemestre (self, texto, semestre):
         listado = cursos.CreditosSemestre(semestre)
         texto.set(f'{listado[0]} Créditos Aprobados\n{listado[1]} Créditos Asignados\n{listado[2]} Créditos Pendientes')
