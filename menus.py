@@ -2,6 +2,7 @@ from cgitb import text
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+import tkinter
 from tkinter.messagebox import *
 from cursos import Cursos
 
@@ -17,23 +18,32 @@ class Menus:
         root.title('INGENIERIA USAC - Práctica 1')
         root.iconbitmap('archivos/books.ico')
         root.config(background='lightblue')
-        root.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
+        #root.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
         # Frame
         frame = Frame (root)
-        frame.config(width='800', height='600', bg='lightblue')
+        frame.config(width='800', height='220', bg='lightblue')
         frame.pack()
+        frame2 = Frame (root)
+        frame2.config(width='800', height='300', bg='lightblue')
+        frame2.pack()
         # Títulos de la ventana
         titulos = Label (frame, text='\n\nCurso: Lenguajes Formales y de Programación\n\nEstudiante: Fredy Samuel Quijada Ceballos\n\nCarné: 202004812\n\n\n')
         titulos.config(background='lightblue', font=('Arial', 12, 'bold'), justify='left')
         titulos.grid(row=0, padx=0, pady=3, columnspan=1)
+        titulos.place(x='100', y='20')
+        # Imagen
+        img = PhotoImage(file='archivos/usac.png')
+        imgLabel = Label(frame, image=img)
+        imgLabel.config(background='lightblue')
+        imgLabel.place(x='550', y='10')
         # Botones de la ventana
-        botonCarga = ttk.Button (frame, text='Cargar Archivo', command=lambda: self.AbrirArchivo())
+        botonCarga = ttk.Button (frame2, text='Cargar Archivo', command=lambda: self.AbrirArchivo())
         botonCarga.grid(column=1, row=3, ipadx=100, ipady=5, padx=10, pady=10)
-        botonGestionar = ttk.Button (frame, text='Gestionar Cursos', command=lambda: self.VentanaGestion())
+        botonGestionar = ttk.Button (frame2, text='Gestionar Cursos', command=lambda: self.VentanaGestion())
         botonGestionar.grid(column=1, row=4, ipadx=95, ipady=5, padx=10, pady=10)
-        botonCreditos = ttk.Button (frame, text='Conteo de Créditos', command=lambda: self.VentanaCreditos())
+        botonCreditos = ttk.Button (frame2, text='Conteo de Créditos', command=lambda: self.VentanaCreditos())
         botonCreditos.grid(column=1, row=5, ipadx=88, ipady=5, padx=10, pady=10)
-        botonSalir = ttk.Button (frame, text='Salir', command=lambda: self.EliminarVentana(root))
+        botonSalir = ttk.Button (frame2, text='Salir', command=lambda: self.EliminarVentana(root))
         botonSalir.grid(column=1, row=6, ipadx=105, ipady=5, padx=10, pady=10)
         # Para que la ventana principal se inicie automáticamente
         root.mainloop()
@@ -68,8 +78,8 @@ class Menus:
         tabla.bind('<Button-1>', Click)
         tabla.grid(row='10', column='0', columnspan='2', pady=100)
         tabla.column('#0', width=50)
-        tabla.column('#1', width=250, anchor=CENTER)
-        tabla.column('#2', width=95, anchor=CENTER)
+        tabla.column('#1', width=240, anchor=CENTER)
+        tabla.column('#2', width=105, anchor=CENTER)
         tabla.column('#3', width=80, anchor=CENTER)
         tabla.column('#4', width=70, anchor=CENTER)
         tabla.column('#5', width=70, anchor=CENTER)
@@ -105,14 +115,14 @@ class Menus:
         ventanaGestionarCursos.title('INGENIERIA USAC - Agregar Curso')
         ventanaGestionarCursos.iconbitmap('archivos/books.ico')
         ventanaGestionarCursos.config(background='lightblue')
-        #ventanaGestionarCursos.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
+        ventanaGestionarCursos.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
         ventanaGestionarCursos.protocol('WM_DELETE_WINDOW', root.quit)
-        # Frame
+        # Frame Superior
         frame = Frame (ventanaGestionarCursos)
         frame.config(width='600', height='400', bg='lightblue')
         frame.place(x='0', y='100')
         frame.pack()
-        # Frame
+        # Frame Inferior
         frame2 = Frame (ventanaGestionarCursos)
         frame2.config(width='600', height='100', bg='lightblue')
         frame2.place(x='0', y='100')
@@ -204,7 +214,7 @@ class Menus:
         ventanaGestionarCursos.title('INGENIERIA USAC - Agregar Curso')
         ventanaGestionarCursos.iconbitmap('archivos/books.ico')
         ventanaGestionarCursos.config(background='lightblue')
-        #ventanaGestionarCursos.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
+        ventanaGestionarCursos.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
         ventanaGestionarCursos.protocol('WM_DELETE_WINDOW', root.quit)
         # Frame
         frame = Frame (ventanaGestionarCursos)
@@ -282,7 +292,78 @@ class Menus:
 
     # Crear ventana para la gestión con los créditos
     def VentanaCreditos (self):
-        pass
+        self.OcultarVentana(root)
+        # Ventana Agregar Cursos
+        ventanaCreditos = Toplevel ()
+        ventanaCreditos.geometry(self.EditorVentana(root, 600, 500))
+        ventanaCreditos.title('INGENIERIA USAC - Agregar Curso')
+        ventanaCreditos.iconbitmap('archivos/books.ico')
+        ventanaCreditos.config(background='lightblue')
+        ventanaCreditos.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
+        ventanaCreditos.protocol('WM_DELETE_WINDOW', root.quit)
+        # Frame Superior
+        frame = Frame (ventanaCreditos)
+        frame.config(width='600', height='150', bg='lightblue')
+        frame.place(x='0', y='100')
+        frame.pack()
+        # Frame Central
+        frame2 = Frame (ventanaCreditos)
+        frame2.config(width='600', height='280', bg='lightblue')
+        frame2.place(x='0', y='100')
+        frame2.pack()
+        # Frame Inferior
+        frame3 = Frame (ventanaCreditos)
+        frame3.config(width='400', height='100', bg='lightblue')
+        frame3.place(x='0', y='100')
+        frame3.pack()
+        # Labels Superiores
+        creditosAprobados = Label (frame, text = f'Créditos Aprobados: {cursos.CreditosAprobados()}')
+        creditosAprobados.config(background='lightblue', font=('Arial', 12, 'italic'), justify='left')
+        creditosAprobados.place(x='60', y='30')
+        creditosCursando = Label (frame, text = f'Créditos Cursando: {cursos.CreditosCursando()}')
+        creditosCursando.config(background='lightblue', font=('Arial', 12, 'italic'), justify='left')
+        creditosCursando.place(x='60', y='70')
+        creditosPendientes = Label (frame, text = f'Créditos Pendientes: {cursos.CreditosPendientes()}')
+        creditosPendientes.config(background='lightblue', font=('Arial', 12, 'italic'), justify='left')
+        creditosPendientes.place(x='60', y='110')
+        # Labels centrales
+        creditosObligatorios = Label (frame2, text = 'Créditos obligatorios hasta el semestre: ')
+        creditosObligatorios.config(background='lightblue', font=('Arial', 12, 'italic'), justify='left')
+        creditosObligatorios.place(x='60', y='20')
+        comboObligatorios = ttk.Combobox(frame2)
+        comboObligatorios['values'] = ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10')
+        comboObligatorios.config(width='5')
+        comboObligatorios.current(0)
+        comboObligatorios.place(x='360', y='22')
+        botonCalculo1 = ttk.Button (frame2, text='Calcular', command=lambda: self.CreditosN(calculo1, comboObligatorios.get()))
+        botonCalculo1.grid(column=1, row=1, ipadx=80, ipady=5, padx=10, pady=10)
+        botonCalculo1.place(x='150', y='70')
+        calculo1 = StringVar()
+        calculo1.set('0 Créditos Obligatorios')
+        textoCalculo1 = Label (frame2, textvariable=calculo1)
+        textoCalculo1.config(background='lightblue', font=('Arial', 12, 'italic'), justify='left')
+        textoCalculo1.place(x='250', y='70')
+
+        creditosSemestre = Label (frame2, text = 'Créditos del semestre:')
+        creditosSemestre.config(background='lightblue', font=('Arial', 12, 'italic'), justify='left')
+        creditosSemestre.place(x='60', y='130')
+        comboSemestre = ttk.Combobox(frame2)
+        comboSemestre['values'] = ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10')
+        comboSemestre.config(width='5')
+        comboSemestre.current(0)
+        comboSemestre.place(x='240', y='132')
+        botonCalculo2 = ttk.Button (frame2, text='Calcular', command=lambda: self.CreditosSemestre(calculo2, comboSemestre.get()))
+        botonCalculo2.grid(column=1, row=1, ipadx=80, ipady=5, padx=10, pady=10)
+        botonCalculo2.place(x='150', y='180')
+        calculo2 = StringVar()
+        calculo2.set('0 Créditos Aprobados\n0 Créditos Asignados\n0 Créditos Pendientes')
+        textoCalculo2 = Label (frame2, textvariable=calculo2)
+        textoCalculo2.config(background='lightblue', font=('Arial', 12, 'italic'), justify='left')
+        textoCalculo2.place(x='250', y='180')
+        # Botones
+        botonRegresar = ttk.Button (frame3, text='Regresar', command=lambda: self.MostrarEliminarVentana(root, ventanaCreditos))
+        botonRegresar.grid(column=1, row=1, ipadx=80, ipady=5, padx=10, pady=10)
+
     
     #!:::::::::::::::::::::::::::MÉTODOS DE VENTANAS::::::::::::::::::::::::::::::::::::::::
     # Función para definir el tamaño de la ventana y centrarlo en la pantalla
@@ -366,3 +447,12 @@ class Menus:
             cursos.EliminarCurso(codigo)
             self.EliminarVentana(ventana)
             self.VentanaGestion()  
+
+    # Método para contar los créditos obligatorios hasta el semestre N
+    def CreditosN (self, texto, semestre):
+        texto.set(f'{cursos.CreditosN(semestre)} Créditos Obligatorios')
+
+    # Método para contar los créditos de determinado semestre
+    def CreditosSemestre (self, texto, semestre):
+        listado = cursos.CreditosSemestre(semestre)
+        texto.set(f'{listado[0]} Créditos Aprobados\n{listado[1]} Créditos Asignados\n{listado[2]} Créditos Pendientes')

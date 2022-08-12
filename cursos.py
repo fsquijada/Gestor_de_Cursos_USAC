@@ -111,8 +111,7 @@ class Cursos:
         for curso in self.listado:
             if curso.estado == '0':
                 creditos += int(curso.creditos)
-        print(f'Créditos Aprobados: {creditos}')
-        #!return creditos
+        return creditos
 
     # Cantidad de créditos cursando
     def CreditosCursando (self):
@@ -120,8 +119,7 @@ class Cursos:
         for curso in self.listado:
             if curso.estado == '1':
                 creditos += int(curso.creditos)
-        print(f'Créditos Cursando: {creditos}')
-        #!return creditos
+        return creditos
 
     # Cantidad de créditos pendientes
     def CreditosPendientes (self):
@@ -129,7 +127,6 @@ class Cursos:
         for curso in self.listado:
             if curso.estado == '-1':
                 creditos += int(curso.creditos)
-        print(f'Créditos Pendientes: {creditos}')
         return creditos
 
     # Cantidad de créditos hasta semestre N
@@ -139,7 +136,7 @@ class Cursos:
             if  int(curso.semestre) <= int(semestre):
                 if curso.obligatorio == '1':
                     creditos += int(curso.creditos)
-        print(f'Creditos obligatorios hasta el semestre {semestre}: {creditos}')
+        #print(f'Creditos obligatorios hasta el semestre {semestre}: {creditos}')
         return creditos
 
     # Cantidad de créditos del semestre
@@ -147,6 +144,7 @@ class Cursos:
         creditosAprobados = 0
         creditosAsignados = 0
         creditosPendientes = 0
+        listaCreditos = []
         for curso in self.listado:
             if int(semestre) == int(curso.semestre):
                 if curso.estado == '0':
@@ -155,4 +153,8 @@ class Cursos:
                     creditosAsignados += int(curso.creditos)
                 else:
                     creditosPendientes += int(curso.creditos)
-        print (f'Aprobados: {creditosAprobados}\nAsignados: {creditosAsignados}\nPendientes: {creditosPendientes}')
+        listaCreditos.append(creditosAprobados)
+        listaCreditos.append(creditosAsignados)
+        listaCreditos.append(creditosPendientes)
+        #print (f'Aprobados: {creditosAprobados}\nAsignados: {creditosAsignados}\nPendientes: {creditosPendientes}')
+        return listaCreditos
