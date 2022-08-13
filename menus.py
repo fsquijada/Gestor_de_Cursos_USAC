@@ -51,9 +51,9 @@ class Menus:
         # Evento al hacer doble click en la tabla
         def Click (event):
             if cursos.listado != []:
+                tabla.selection_set(tabla.get_children()[(len(cursos.listado)-1)])
                 botonEditar['state'] = 'normal'
                 botonEliminar['state'] = 'normal'
-            #print (str(tabla.item(tabla.selection())['text']))
         # Ocultar ventana principal
         self.OcultarVentana(root)
         # Ventana de Selección de archivo
