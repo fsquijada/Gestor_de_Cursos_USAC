@@ -126,7 +126,8 @@ class Cursos:
         creditos = 0
         for curso in self.listado:
             if curso.estado == '-1':
-                creditos += int(curso.creditos)
+                if curso.obligatorio == '1':
+                    creditos += int(curso.creditos)
         return creditos
 
     # Cantidad de créditos hasta semestre N
