@@ -101,6 +101,8 @@ class Menus:
         botonEliminar = ttk.Button (frame2, text='Eliminar Curso', command=lambda: self.EliminarCurso(ventanaGestionarCursos, tabla.item(tabla.selection())['text'], tabla.item(tabla.selection())['values'][0]))
         botonEliminar.grid(column=3, row=1, ipadx=55, ipady=5, padx=10, pady=10)
         botonEliminar['state'] = 'disabled'
+        botonBuscar = ttk.Button (frame2, text='Buscar Curso', command=lambda: self.VentanaCodigo(ventanaGestionarCursos))
+        botonBuscar.grid(column=2, row=2, ipadx=55, ipady=5, padx=10, pady=10)
         botonRegresar = ttk.Button (frame2, text='Regresar', command=lambda: self.MostrarEliminarVentana(root, ventanaGestionarCursos))
         botonRegresar.grid(column=3, row=2, ipadx=60, ipady=5, padx=10, pady=10)
         
@@ -108,20 +110,20 @@ class Menus:
     def VentanaAgregar (self, ventana):
         self.OcultarVentana(ventana)
         # Ventana Agregar Cursos
-        ventanaGestionarCursos = Toplevel ()
-        ventanaGestionarCursos.geometry(self.EditorVentana(root, 600, 500))
-        ventanaGestionarCursos.title('INGENIERIA USAC - Agregar Curso')
-        ventanaGestionarCursos.iconbitmap('archivos/books.ico')
-        ventanaGestionarCursos.config(background='lightblue')
-        ventanaGestionarCursos.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
-        ventanaGestionarCursos.protocol('WM_DELETE_WINDOW', root.quit)
+        ventanaAgregar = Toplevel ()
+        ventanaAgregar.geometry(self.EditorVentana(root, 600, 500))
+        ventanaAgregar.title('INGENIERIA USAC - Agregar Curso')
+        ventanaAgregar.iconbitmap('archivos/books.ico')
+        ventanaAgregar.config(background='lightblue')
+        ventanaAgregar.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
+        ventanaAgregar.protocol('WM_DELETE_WINDOW', root.quit)
         # Frame Superior
-        frame = Frame (ventanaGestionarCursos)
+        frame = Frame (ventanaAgregar)
         frame.config(width='600', height='400', bg='lightblue')
         frame.place(x='0', y='100')
         frame.pack()
         # Frame Inferior
-        frame2 = Frame (ventanaGestionarCursos)
+        frame2 = Frame (ventanaAgregar)
         frame2.config(width='600', height='100', bg='lightblue')
         frame2.place(x='0', y='100')
         frame2.pack()
@@ -178,9 +180,9 @@ class Menus:
         estado3 = Radiobutton (frame, text='Pendiente', value='-1', variable=est, background='lightblue', font=('Arial', 12, 'italic'))
         estado3.place(x='400', y='360')
         # Botones
-        botonAgregar = ttk.Button (frame2, text='Agregar Curso', command=lambda: self.AgregarCurso(ventanaGestionarCursos, codigoEntrada.get(), nombreEntrada.get(), preRequisitosEntrada.get(), semestreEntrada.get(), opc.get(), creditosEntrada.get(), est.get()))
+        botonAgregar = ttk.Button (frame2, text='Agregar Curso', command=lambda: self.AgregarCurso(ventanaAgregar, codigoEntrada.get(), nombreEntrada.get(), preRequisitosEntrada.get(), semestreEntrada.get(), opc.get(), creditosEntrada.get(), est.get()))
         botonAgregar.grid(column=1, row=1, ipadx=30, ipady=5, padx=100, pady=30)
-        botonCancelar = ttk.Button (frame2, text='Cancelar', command=lambda: self.MostrarEliminarVentana(ventana, ventanaGestionarCursos))
+        botonCancelar = ttk.Button (frame2, text='Cancelar', command=lambda: self.MostrarEliminarVentana(ventana, ventanaAgregar))
         botonCancelar.grid(column=2, row=1, ipadx=35, ipady=5, padx=10, pady=30)
     
     # Crear ventana para editar nuevos cursos
@@ -206,21 +208,21 @@ class Menus:
             estadoTabla = '-1'
         # Oculta la ventana de gestión
         self.OcultarVentana(ventana)
-        # Ventana Agregar Cursos
-        ventanaGestionarCursos = Toplevel ()
-        ventanaGestionarCursos.geometry(self.EditorVentana(root, 600, 500))
-        ventanaGestionarCursos.title('INGENIERIA USAC - Agregar Curso')
-        ventanaGestionarCursos.iconbitmap('archivos/books.ico')
-        ventanaGestionarCursos.config(background='lightblue')
-        ventanaGestionarCursos.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
-        ventanaGestionarCursos.protocol('WM_DELETE_WINDOW', root.quit)
+        # Ventana Editar Curso
+        ventanaEditarCurso = Toplevel ()
+        ventanaEditarCurso.geometry(self.EditorVentana(root, 600, 500))
+        ventanaEditarCurso.title('INGENIERIA USAC - Editar Curso')
+        ventanaEditarCurso.iconbitmap('archivos/books.ico')
+        ventanaEditarCurso.config(background='lightblue')
+        ventanaEditarCurso.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
+        ventanaEditarCurso.protocol('WM_DELETE_WINDOW', root.quit)
         # Frame
-        frame = Frame (ventanaGestionarCursos)
+        frame = Frame (ventanaEditarCurso)
         frame.config(width='600', height='400', bg='lightblue')
         frame.place(x='0', y='100')
         frame.pack()
         # Frame
-        frame2 = Frame (ventanaGestionarCursos)
+        frame2 = Frame (ventanaEditarCurso)
         frame2.config(width='600', height='100', bg='lightblue')
         frame2.place(x='0', y='100')
         frame2.pack()
@@ -283,18 +285,151 @@ class Menus:
         estado3.place(x='400', y='360')
         esta.set(value=estadoTabla)
         # Botones
-        botonEditar = ttk.Button (frame2, text='Editar Curso', command=lambda: self.EditarCurso(ventanaGestionarCursos, codigoEntrada.get(), nombreEntrada.get(), preRequisitosEntrada.get(), semestreEntrada.get(), opc.get(), creditosEntrada.get(), esta.get()))
+        botonEditar = ttk.Button (frame2, text='Editar Curso', command=lambda: self.EditarCurso(ventanaEditarCurso, codigoEntrada.get(), nombreEntrada.get(), preRequisitosEntrada.get(), semestreEntrada.get(), opc.get(), creditosEntrada.get(), esta.get()))
         botonEditar.grid(column=1, row=1, ipadx=30, ipady=5, padx=100, pady=30)
-        botonCancelar = ttk.Button (frame2, text='Cancelar', command=lambda: self.MostrarEliminarVentana(ventana, ventanaGestionarCursos))
+        botonCancelar = ttk.Button (frame2, text='Cancelar', command=lambda: self.MostrarEliminarVentana(ventana, ventanaEditarCurso))
         botonCancelar.grid(column=2, row=1, ipadx=35, ipady=5, padx=10, pady=30)
+
+    # Crear ventana para el ingreso de un código de búsqueda
+    def VentanaCodigo (self, ventana):
+        if cursos.listado != []:
+            self.OcultarVentana(ventana)
+            # Ventana Código
+            ventanaCodigo = Toplevel ()
+            ventanaCodigo.geometry(self.EditorVentana(root, 600, 200))
+            ventanaCodigo.title('INGENIERIA USAC - Buscar Curso')
+            ventanaCodigo.iconbitmap('archivos/books.ico')
+            ventanaCodigo.config(background='lightblue')
+            ventanaCodigo.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
+            ventanaCodigo.protocol('WM_DELETE_WINDOW', root.quit)
+            # Frame
+            frame = Frame (ventanaCodigo)
+            frame.config(width='600', height='100', bg='lightblue')
+            frame.place(x='0', y='100')
+            frame.pack()
+            # Frame Inferior
+            frame2 = Frame (ventanaCodigo)
+            frame2.config(width='600', height='50', bg='lightblue')
+            frame2.place(x='0', y='100')
+            frame2.pack()
+            # Labels
+            codigo = Label (frame, text='Código')
+            codigo.config(background='lightblue', font=('Arial', 12), pady=10)
+            codigo.place(x='50', y='50')
+            # Botones
+            botonBuscar = ttk.Button (frame2, text='Buscar Curso', command=lambda: self.VentanaBusqueda(cod.get(), ventanaCodigo, ventana))
+            botonBuscar.grid(column=1, row=1, ipadx=30, ipady=5, padx=100, pady=30)
+            botonRegresar = ttk.Button (frame2, text='Regresar', command=lambda: self.MostrarEliminarVentana(ventana, ventanaCodigo))
+            botonRegresar.grid(column=2, row=1, ipadx=35, ipady=5, padx=10, pady=30)
+            # Entradas
+            cod = StringVar()
+            codigoEntrada = Entry(frame, textvariable = cod, width='40', background='white', font=('Arial', 12, 'italic'), justify=CENTER, borderwidth=2)
+            codigoEntrada.place(x='180', y='60')
+        else:
+            showerror ('INGENIERIA USAC - Buscar Curso', 'No existe ningún curso aún')
+
+    # Crear ventana para el curso buscado
+    def VentanaBusqueda (self, codigo, ventana, ventanaGestion):
+        if codigo == '':
+            showerror ('INGENIERIA USAC - Buscar Curso', 'Debe de ingresar un código')
+        else:
+            curso = cursos.MostrarCurso (codigo)
+            if curso == []:
+                showerror ('INGENIERIA USAC - Buscar Curso', 'El código ingresado no pertenece a ningún curso')
+            else:
+                if curso[2] == '' or curso[2] == {''} or curso[2] == ['']:
+                    curso[2] = ''
+                # Oculta la ventana de gestión
+                self.EliminarVentana(ventana)
+                # Ventana Editar Curso
+                ventanaEditarCurso = Toplevel ()
+                ventanaEditarCurso.geometry(self.EditorVentana(root, 600, 500))
+                ventanaEditarCurso.title('INGENIERIA USAC - Editar Curso')
+                ventanaEditarCurso.iconbitmap('archivos/books.ico')
+                ventanaEditarCurso.config(background='lightblue')
+                ventanaEditarCurso.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
+                ventanaEditarCurso.protocol('WM_DELETE_WINDOW', root.quit)
+                # Frame
+                frame = Frame (ventanaEditarCurso)
+                frame.config(width='600', height='400', bg='lightblue')
+                frame.place(x='0', y='100')
+                frame.pack()
+                # Frame
+                frame2 = Frame (ventanaEditarCurso)
+                frame2.config(width='600', height='100', bg='lightblue')
+                frame2.place(x='0', y='100')
+                frame2.pack()
+                # Labels
+                codigo = Label (frame, text='Código')
+                codigo.config(background='lightblue', font=('Arial', 12), pady=10)
+                codigo.place(x='50', y='50')
+                nombre = Label (frame, text='Nombre')
+                nombre.config(background='lightblue', font=('Arial', 12), pady=10)
+                nombre.place(x='50', y='100')
+                preRequisito = Label (frame, text='Pre-Requisitos')
+                preRequisito.config(background='lightblue', font=('Arial', 12), pady=10)
+                preRequisito.place(x='50', y='150')
+                semestre = Label (frame, text='Semestre')
+                semestre.config(background='lightblue', font=('Arial', 12), pady=10)
+                semestre.place(x='50', y='200')
+                opcionalidad = Label (frame, text='Opcionalidad')
+                opcionalidad.config(background='lightblue', font=('Arial', 12), pady=10)
+                opcionalidad.place(x='50', y='250')
+                creditos = Label (frame, text='Créditos')
+                creditos.config(background='lightblue', font=('Arial', 12), pady=10)
+                creditos.place(x='50', y='300')
+                estado = Label (frame, text='Estado')
+                estado.config(background='lightblue', font=('Arial', 12), pady=10)
+                estado.place(x='50', y='350')
+                # Entradas
+                cod = StringVar()
+                name = StringVar()
+                pre = StringVar()
+                sem = StringVar()
+                opc = StringVar()
+                cre = StringVar()
+                esta = StringVar()
+                codigoEntrada = Entry(frame, textvariable = cod, width='40', background='white', font=('Arial', 12, 'italic'), justify=CENTER, borderwidth=2)
+                codigoEntrada.insert(0, curso[0])
+                codigoEntrada['state'] = 'disabled'
+                codigoEntrada.place(x='180', y='60')
+                nombreEntrada = Entry(frame, textvariable = name, width='40', background='white', font=('Arial', 12, 'italic'), justify=CENTER, borderwidth=2)
+                nombreEntrada.insert(0, curso[1])
+                nombreEntrada.place(x='180', y='110')
+                preRequisitosEntrada = Entry(frame, textvariable = pre, width='40', background='white', font=('Arial', 12, 'italic'), justify=CENTER, borderwidth=2)
+                preRequisitosEntrada.insert(0, curso[2])
+                preRequisitosEntrada.place(x='180', y='160')
+                semestreEntrada = Entry(frame, textvariable = sem, width='40', background='white', font=('Arial', 12, 'italic'), justify=CENTER, borderwidth=2)
+                semestreEntrada.insert(0, curso[3])
+                semestreEntrada.place(x='180', y='210')
+                opcionalidad1 = Radiobutton (frame, text='Obligatorio', value='1', variable=opc, background='lightblue', font=('Arial', 12, 'italic'))
+                opcionalidad1.place(x='220', y='260')
+                opcionalidad2 = Radiobutton (frame, text='Opcional', value='0', variable=opc, background='lightblue', font=('Arial', 12, 'italic'))
+                opcionalidad2.place(x='380', y='260')
+                opc.set(value=curso[4])
+                creditosEntrada = Entry(frame, textvariable = cre, width='40', background='white', font=('Arial', 12, 'italic'), justify=CENTER, borderwidth=2)
+                creditosEntrada.insert(0, curso[5])
+                creditosEntrada.place(x='180', y='310')
+                estado1 = Radiobutton (frame, text='Aprobado', value='0', variable=esta, background='lightblue', font=('Arial', 12, 'italic'))
+                estado1.place(x='200', y='360')
+                estado2 = Radiobutton (frame, text='Cursando', value='1', variable=esta, background='lightblue', font=('Arial', 12, 'italic'))
+                estado2.place(x='300', y='360')
+                estado3 = Radiobutton (frame, text='Pendiente', value='-1', variable=esta, background='lightblue', font=('Arial', 12, 'italic'))
+                estado3.place(x='400', y='360')
+                esta.set(value=curso[6])
+                # Botones
+                botonEditar = ttk.Button (frame2, text='Editar Curso', command=lambda: self.EditarCurso(ventanaEditarCurso, codigoEntrada.get(), nombreEntrada.get(), preRequisitosEntrada.get(), semestreEntrada.get(), opc.get(), creditosEntrada.get(), esta.get()))
+                botonEditar.grid(column=1, row=1, ipadx=30, ipady=5, padx=100, pady=30)
+                botonCancelar = ttk.Button (frame2, text='Cancelar', command=lambda: self.MostrarEliminarVentana(ventanaGestion, ventanaEditarCurso))
+                botonCancelar.grid(column=2, row=1, ipadx=35, ipady=5, padx=10, pady=30)
 
     # Crear ventana para la gestión con los créditos
     def VentanaCreditos (self):
         self.OcultarVentana(root)
-        # Ventana Agregar Cursos
+        # Ventana Créditos
         ventanaCreditos = Toplevel ()
         ventanaCreditos.geometry(self.EditorVentana(root, 600, 500))
-        ventanaCreditos.title('INGENIERIA USAC - Agregar Curso')
+        ventanaCreditos.title('INGENIERIA USAC - Gestión de créditos')
         ventanaCreditos.iconbitmap('archivos/books.ico')
         ventanaCreditos.config(background='lightblue')
         ventanaCreditos.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
@@ -413,7 +548,7 @@ class Menus:
 
     # Método para agregar cursos a la base de datos
     def AgregarCurso (self, ventana, codigo, nombre, preRequisitos, semestre, opcionalidad, creditos, estado):
-        if codigo == "" or nombre == "" or semestre == "" or creditos == "":
+        if codigo == '' or nombre == '' or semestre == '' or creditos == '':
             showerror ('INGENIERIA USAC - Agregar Curso', 'Aún no se han ingresado todos los datos')
         else:
             if semestre == '1' or semestre == '2' or semestre == '3' or semestre == '4' or semestre == '5' or semestre == '6' or semestre == '7' or semestre == '8' or semestre == '9' or semestre == '10':
@@ -427,7 +562,7 @@ class Menus:
 
     # Método para editar cursos en la base de datos
     def EditarCurso (self, ventana, codigo, nombre, preRequisitos, semestre, opcionalidad, creditos, estado):
-        if nombre == "" or semestre == "" or creditos == "":
+        if nombre == '' or semestre == '' or creditos == '':
             showerror ('INGENIERIA USAC - Editar Curso', 'Aún no se han ingresado todos los datos')
         else:
             if semestre == '1' or semestre == '2' or semestre == '3' or semestre == '4' or semestre == '5' or semestre == '6' or semestre == '7' or semestre == '8' or semestre == '9' or semestre == '10':

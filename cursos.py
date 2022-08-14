@@ -71,11 +71,18 @@ class Cursos:
 
     # Mostrar un Curso
     def MostrarCurso (self, codigo):
+        datos = []
         for curso in self.listado:
             if codigo == curso.codigo:
-                print(f'Codigo: {curso.codigo}, Nombre: {curso.nombre}, Pre: {curso.pre_requisitos}, Obligatorio: {curso.obligatorio}, Semestre: {curso.semestre}, Creditos: {curso.creditos}, Estado: {curso.estado}')
-                return
-        return None
+                datos.append(curso.codigo)
+                datos.append(curso.nombre)
+                datos.append(curso.pre_requisitos)
+                datos.append(curso.semestre)
+                datos.append(curso.obligatorio)
+                datos.append(curso.creditos)
+                datos.append(curso.estado)
+                #print(f'Codigo: {curso.codigo}, Nombre: {curso.nombre}, Pre: {curso.pre_requisitos}, Obligatorio: {curso.obligatorio}, Semestre: {curso.semestre}, Creditos: {curso.creditos}, Estado: {curso.estado}')
+                return datos
 
     # Agregar Curso
     def AgregarCurso (self, codigo, nombre, pre_requisitos, obligatorio, semestre, creditos, estado):
