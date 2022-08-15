@@ -334,7 +334,7 @@ class Menus:
             showerror ('INGENIERIA USAC - Buscar Curso', 'Debe de ingresar un código')
         else:
             curso = cursos.MostrarCurso (codigo)
-            if curso == []:
+            if curso == None:
                 showerror ('INGENIERIA USAC - Buscar Curso', 'El código ingresado no pertenece a ningún curso')
             else:
                 if curso[2] == '' or curso[2] == {''} or curso[2] == ['']:
@@ -419,9 +419,11 @@ class Menus:
                 esta.set(value=curso[6])
                 # Botones
                 botonEditar = ttk.Button (frame2, text='Editar Curso', command=lambda: self.EditarCurso(ventanaEditarCurso, codigoEntrada.get(), nombreEntrada.get(), preRequisitosEntrada.get(), semestreEntrada.get(), opc.get(), creditosEntrada.get(), esta.get()))
-                botonEditar.grid(column=1, row=1, ipadx=30, ipady=5, padx=100, pady=30)
+                botonEditar.grid(column=1, row=1, ipadx=35, ipady=5, padx=10, pady=30)
+                botonEliminar = ttk.Button (frame2, text='Eliminar Curso', command=lambda: self.EliminarCurso(ventanaEditarCurso, curso[0], curso[1]))
+                botonEliminar.grid(column=2, row=1, ipadx=35, ipady=5, padx=10, pady=30)
                 botonCancelar = ttk.Button (frame2, text='Cancelar', command=lambda: self.MostrarEliminarVentana(ventanaGestion, ventanaEditarCurso))
-                botonCancelar.grid(column=2, row=1, ipadx=35, ipady=5, padx=10, pady=30)
+                botonCancelar.grid(column=3, row=1, ipadx=35, ipady=5, padx=10, pady=30)
 
     # Crear ventana para la gestión con los créditos
     def VentanaCreditos (self):

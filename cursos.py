@@ -83,6 +83,7 @@ class Cursos:
                 datos.append(curso.estado)
                 #print(f'Codigo: {curso.codigo}, Nombre: {curso.nombre}, Pre: {curso.pre_requisitos}, Obligatorio: {curso.obligatorio}, Semestre: {curso.semestre}, Creditos: {curso.creditos}, Estado: {curso.estado}')
                 return datos
+        return None
 
     # Agregar Curso
     def AgregarCurso (self, codigo, nombre, pre_requisitos, obligatorio, semestre, creditos, estado):
