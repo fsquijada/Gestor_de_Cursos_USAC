@@ -64,11 +64,6 @@ class Cursos:
                 nuevo = Listado (codigo, nombre, pre_requisitos, obligatorio, semestre, creditos, estado)
                 self.listado.append (nuevo)
 
-    # Ver listado actual
-    def ListadoCompleto (self):
-        for curso in self.listado:
-            print(f'Codigo: {curso.codigo}, Nombre: {curso.nombre}, Pre: {curso.pre_requisitos}, Obligatorio: {curso.obligatorio}, Semestre: {curso.semestre}, Creditos: {curso.creditos}, Estado: {curso.estado}')
-
     # Mostrar un Curso
     def MostrarCurso (self, codigo):
         datos = []

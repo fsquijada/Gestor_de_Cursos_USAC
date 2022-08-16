@@ -193,7 +193,10 @@ class Menus:
         opcionalidadTabla = str(tabla.item(tabla.selection())['values'][2])
         semestreTabla = str(tabla.item(tabla.selection())['values'][3])
         creditosTabla = str(tabla.item(tabla.selection())['values'][4])
-        estadoTabla = str(tabla.item(tabla.selection())['values'][5])        
+        estadoTabla = str(tabla.item(tabla.selection())['values'][5])   
+        # Cambia el valor de los prerrequisitos para la edición
+        if preRequisitosTabla == '--':
+            preRequisitosTabla = ''
         # Cambia el valor de la opcionalidad para la edición
         if opcionalidadTabla == 'Si':
             opcionalidadTabla = '1'
@@ -326,7 +329,7 @@ class Menus:
             codigoEntrada = Entry(frame, textvariable = cod, width='40', background='white', font=('Arial', 12, 'italic'), justify=CENTER, borderwidth=2)
             codigoEntrada.place(x='180', y='60')
         else:
-            showerror ('INGENIERIA USAC - Buscar Curso', 'No existe ningún curso aún')
+            showerror ('INGENIERIA USAC - Buscar Curso', 'No se encuentra ningún curso en el sistema.')
 
     # Crear ventana para el curso buscado
     def VentanaBusqueda (self, codigo, ventana, ventanaGestion):
@@ -342,20 +345,20 @@ class Menus:
                 # Oculta la ventana de gestión
                 self.EliminarVentana(ventana)
                 # Ventana Editar Curso
-                ventanaEditarCurso = Toplevel ()
-                ventanaEditarCurso.geometry(self.EditorVentana(root, 600, 500))
-                ventanaEditarCurso.title('INGENIERIA USAC - Editar Curso')
-                ventanaEditarCurso.iconbitmap('archivos/books.ico')
-                ventanaEditarCurso.config(background='lightblue')
-                ventanaEditarCurso.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
-                ventanaEditarCurso.protocol('WM_DELETE_WINDOW', root.quit)
+                ventanaEcontrado = Toplevel ()
+                ventanaEcontrado.geometry(self.EditorVentana(root, 600, 500))
+                ventanaEcontrado.title('INGENIERIA USAC - Curso Encontrado')
+                ventanaEcontrado.iconbitmap('archivos/books.ico')
+                ventanaEcontrado.config(background='lightblue')
+                ventanaEcontrado.resizable(0,0) # Para que no se pueda modificar tamaño de ventana
+                ventanaEcontrado.protocol('WM_DELETE_WINDOW', root.quit)
                 # Frame
-                frame = Frame (ventanaEditarCurso)
+                frame = Frame (ventanaEcontrado)
                 frame.config(width='600', height='400', bg='lightblue')
                 frame.place(x='0', y='100')
                 frame.pack()
                 # Frame
-                frame2 = Frame (ventanaEditarCurso)
+                frame2 = Frame (ventanaEcontrado)
                 frame2.config(width='600', height='100', bg='lightblue')
                 frame2.place(x='0', y='100')
                 frame2.pack()
@@ -418,11 +421,11 @@ class Menus:
                 estado3.place(x='400', y='360')
                 esta.set(value=curso[6])
                 # Botones
-                botonEditar = ttk.Button (frame2, text='Editar Curso', command=lambda: self.EditarCurso(ventanaEditarCurso, codigoEntrada.get(), nombreEntrada.get(), preRequisitosEntrada.get(), semestreEntrada.get(), opc.get(), creditosEntrada.get(), esta.get()))
+                botonEditar = ttk.Button (frame2, text='Editar Curso', command=lambda: self.EditarCurso(ventanaEcontrado, codigoEntrada.get(), nombreEntrada.get(), preRequisitosEntrada.get(), semestreEntrada.get(), opc.get(), creditosEntrada.get(), esta.get()))
                 botonEditar.grid(column=1, row=1, ipadx=35, ipady=5, padx=10, pady=30)
-                botonEliminar = ttk.Button (frame2, text='Eliminar Curso', command=lambda: self.EliminarCurso(ventanaEditarCurso, curso[0], curso[1]))
+                botonEliminar = ttk.Button (frame2, text='Eliminar Curso', command=lambda: self.EliminarCurso(ventanaEcontrado, curso[0], curso[1]))
                 botonEliminar.grid(column=2, row=1, ipadx=35, ipady=5, padx=10, pady=30)
-                botonCancelar = ttk.Button (frame2, text='Cancelar', command=lambda: self.MostrarEliminarVentana(ventanaGestion, ventanaEditarCurso))
+                botonCancelar = ttk.Button (frame2, text='Cancelar', command=lambda: self.MostrarEliminarVentana(ventanaGestion, ventanaEcontrado))
                 botonCancelar.grid(column=3, row=1, ipadx=35, ipady=5, padx=10, pady=30)
 
     # Crear ventana para la gestión con los créditos
