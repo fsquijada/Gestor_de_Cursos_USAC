@@ -10,7 +10,7 @@ cursos = Cursos ()
 
 class Menus:
     #!::::::::::::::::::::::::::::::::VENTANAS::::::::::::::::::::::::::::::::::::::::::::::
-    def __init__(self):        
+    def __init__(self):
         # MENU PRINCIPAL
         root.geometry(self.EditorVentana(root, 800, 500))
         root.title('INGENIERIA USAC - Práctica 1')
